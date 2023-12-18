@@ -5,7 +5,8 @@ declare(strict_types=1);
 use App\App;
 use App\Config;
 use App\Router;
-use App\Controllers\SubmitController;
+use App\Controllers\UserController;
+use App\Models\UserModel;
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -13,12 +14,17 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
-define('VIEW_PATH', __DIR__ . '/../views');
+define('VIEW_PATH', __DIR__ . '/../views'); 
 
 $router = new Router();
 
 $router
-    ->get('/', [SubmitController::class, 'submitView']);
+    ->get('/', [UserController::class, 'submitView'])
+    ->post('/processEntries', [UserController::class, 'processEntries'])
+    ->get('/successView', [UserController::class, 'successView'])
+    ->get('/errorView', [UserController::class, 'errorView'])
+    ->post('/deleteUser', [UserController::class, 'deleteUser']);
+    
 
 (new App(
     $router,
