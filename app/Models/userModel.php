@@ -27,6 +27,18 @@ class UserModel {
     }
 
     public function submitEntries($entries) {
+        if (empty($entries['name'])) {
+            return false;
+        }
+    
+        if (empty($entries['email']) || !filter_var($entries['email'], FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+    
+        if (empty($entries['phone'])) {
+            return false;
+        }
+
         $registerQuery = 'INSERT INTO users (name, email, phone)
         VALUES (:name, :email, :phone)';
         try {
@@ -75,5 +87,15 @@ class UserModel {
             return false;
         }
 
+    }
+    public function get(){
+        $getQuery = 'SELECT * FROM users';
+        $users = [];
+
+        foreach ($this->dbConnection->query($getQuery) as $user){
+            $users[] = $user;
+       }
+       
+       return $users;
     }
 }

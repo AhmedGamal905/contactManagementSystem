@@ -9,6 +9,15 @@
     .view-btn {
       margin-top: 10px;
       margin-left: 10px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
     }
     .delete-section {
       margin-top: 20px;
@@ -31,12 +40,14 @@
     <button type="submit" class="submit-btn">Submit</button>
   </form>
 
-  <button id="view-btn" class="view-btn">View Submissions</button>
+  <form action="/userView" method="POST" style="display: inline;">
+    <input type="submit" value="View Submissions" class="view-btn">
+  </form>
 
   <div class="delete-section">
     <form action="/deleteUser" method="POST">
       <label for="delete-id">Delete User Data (Enter ID):</label>
-      <input type="text" id="delete-id" name="id">
+      <input type="text" id="delete-id" name="id" required>
       <button type="submit" id="delete-btn">Delete</button>
     </form>
   </div>

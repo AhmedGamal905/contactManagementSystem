@@ -8,7 +8,6 @@ use App\Router;
 use App\Controllers\UserController;
 use App\Models\UserModel;
 
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -23,7 +22,9 @@ $router
     ->post('/processEntries', [UserController::class, 'processEntries'])
     ->get('/successView', [UserController::class, 'successView'])
     ->get('/errorView', [UserController::class, 'errorView'])
-    ->post('/deleteUser', [UserController::class, 'deleteUser']);
+    ->post('/deleteUser', [UserController::class, 'deleteUser'])
+    ->post('/userView', [UserController::class, 'userView'])
+    ->post('/getUsers', [UserController::class, 'getUsers']);
     
 
 (new App(

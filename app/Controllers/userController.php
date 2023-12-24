@@ -14,10 +14,6 @@ class UserController {
     {
         $this->UserModel = new UserModel();
     }
-    public function submitView()
-    {
-        return View::make('submitView');
-    }
 
     public function processEntries()
     {
@@ -28,8 +24,10 @@ class UserController {
     
         if ($success) {
             header('Location: /successView');
+            exit();
         } else {
             header('Location: /errorView');
+            exit();
         }
     }
 
@@ -48,7 +46,15 @@ class UserController {
         }
         
     }
-    
+    public function userView()
+    {
+        $users = $this->UserModel->get();
+        return View::make('userView', ['users' => $users]);
+    }
+    public function submitView()
+    {
+        return View::make('submitView');
+    }
     public function successView()
     {
         return View::make('successView');
