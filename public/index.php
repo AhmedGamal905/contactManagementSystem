@@ -6,7 +6,6 @@ use App\App;
 use App\Config;
 use App\Router;
 use App\Controllers\UserController;
-use App\Models\UserModel;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -23,8 +22,7 @@ $router
     ->get('/successView', [UserController::class, 'successView'])
     ->get('/errorView', [UserController::class, 'errorView'])
     ->post('/deleteUser', [UserController::class, 'deleteUser'])
-    ->post('/userView', [UserController::class, 'userView'])
-    ->post('/getUsers', [UserController::class, 'getUsers']);
+    ->post('/userView', [UserController::class, 'userView']);
     
 
 (new App(

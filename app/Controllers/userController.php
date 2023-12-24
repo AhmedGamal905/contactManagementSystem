@@ -18,7 +18,6 @@ class UserController {
     public function processEntries()
     {
         $entries = $_POST;
-    
         $model = new UserModel();
         $success = $model->submitEntries($entries);
     
@@ -42,13 +41,13 @@ class UserController {
             exit();
         } else {
             header('Location: /errorView');
-            exit();
+           exit();
         }
         
     }
     public function userView()
     {
-        $users = $this->UserModel->get();
+        $users = $this->UserModel->getUsers();
         return View::make('userView', ['users' => $users]);
     }
     public function submitView()

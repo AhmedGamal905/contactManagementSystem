@@ -5,10 +5,6 @@ declare(strict_types = 1);
 namespace App;
 
 use PDO;
-
-/**
- * @mixin PDO
- */
 class DB
 {
     private PDO $pdo;

@@ -9,9 +9,6 @@ use PDOException;
 use dotenv;
 use App\DB;
 use App\App;
-use App\View;
-
-require_once ('../vendor/autoload.php');
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env');
 class UserModel {
@@ -88,7 +85,7 @@ class UserModel {
         }
 
     }
-    public function get(){
+    public function getUsers(){
         $getQuery = 'SELECT * FROM users';
         $users = [];
 

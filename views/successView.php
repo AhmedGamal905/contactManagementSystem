@@ -8,5 +8,9 @@
 <body>
   <h1>Success!</h1>
   <p>Your request has been processed successfully.</p>
+
+  <form method="get" action="/">
+    <button type="submit">Home Page</button>
+  </form>
 </body>
 </html>
