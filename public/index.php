@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\App;
 use App\Config;
 use App\Router;
+use App\Container;
 use App\Controllers\UserController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -14,7 +15,8 @@ $dotenv->load();
 
 define('VIEW_PATH', __DIR__ . '/../views'); 
 
-$router = new Router();
+$container = new Container();
+$router    = new Router($container);
 
 $router
     ->get('/', [UserController::class, 'submitView'])

@@ -85,7 +85,8 @@ class UserModel {
         }
 
     }
-    public function getUsers(){
+    public function getUsers(): array
+    {
         $getQuery = 'SELECT * FROM users';
         $users = [];
 

@@ -20,14 +20,17 @@ class UserController {
         $entries = $_POST;
         $model = new UserModel();
         $success = $model->submitEntries($entries);
-    
-        if ($success) {
-            header('Location: /successView');
-            exit();
-        } else {
-            header('Location: /errorView');
-            exit();
+        if (!defined('PHPUnit_MAIN_METHOD')) {
+            if ($success) {
+                header('Location: /successView');
+                exit();
+            } else {
+                header('Location: /errorView');
+                exit();
+            }
         }
+    
+
     }
 
     public function deleteUser()

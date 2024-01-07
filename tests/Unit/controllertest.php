@@ -4,32 +4,42 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use Dotenv\Dotenv;
+use PHPUnit\Framework\TestCase;
 use App\Controllers\UserController;
-
-class controllerTest extends TestCase
+use App\Models\UserModel;
+/** @test */
+class ControllerTest extends TestCase
 {
-    /**@test */
-    
-    public function testProcessEntriesRedirectsUser() {
-       
-    $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
-    $dotenv->load(); 
-    //Given we controller object
-    $userController = new UserController();
-    //when the return from the model is true
-    $success = true;
-    //Calling the processEntries method
-    $userController->processEntries();
 
-    $response = $this->output();
+    public function testProcessEntriesRedirectsUser()
+    {
+        define('PHPUnit_MAIN_METHOD',true); 
+        $_SERVER['REQUEST_URI'] = '/processEntries';
+        $_SERVER['REQUEST_METHOD'] = 'post';
+        $_POST= [
+            'name' => 'ahmed',
+            'phone' => '0101266262',
+            'email' => 'AHmed@ahmed.com',
+        ];
 
-    // Assert that the response contains a Location header
-    $this->assertStringContainsString('Location: /successView', $response);
+        $app = require __DIR__ . '/../../public/index.php';
+        
 
-    // Assert that the response contains an exit() call
-    $this->assertStringContainsString('exit();', $response);
+
+        //$userController = new UserController();
+
+        //$success = true;
+        
+        //$userController->processEntries();
+        $user = new UserModel();
+        //var_dump($user->getUsers());
+        $users = $user->getUsers();
+        $this->assertTrue(end($users)['name']=='ahmed');
+
+     
+     //   $response = $this->getActualOutput();
+
     }
 }
-//./vendor/bin/phpunit --testdox tests/Unit/controllertest.php
+// ./vendor/bin/phpunit --filter ControllerTest tests/Unit/controllertest.php
