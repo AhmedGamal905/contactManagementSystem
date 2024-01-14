@@ -11,7 +11,8 @@ use App\DB;
 use App\App;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env');
-class UserModel {
+class UserModel
+{
 
     protected DB $db;
     protected PDO $dbConnection;
@@ -20,18 +21,19 @@ class UserModel {
     {
         $this->db = App::db();
         $this->dbConnection = DB::getConnection();
-        
+
     }
 
-    public function submitEntries($entries) {
+    public function submitEntries($entries)
+    {
         if (empty($entries['name'])) {
             return false;
         }
-    
+
         if (empty($entries['email']) || !filter_var($entries['email'], FILTER_VALIDATE_EMAIL)) {
             return false;
         }
-    
+
         if (empty($entries['phone'])) {
             return false;
         }
@@ -46,11 +48,11 @@ class UserModel {
                 'phone' => $entries['phone'],
                 'email' => $entries['email'],
             ]);
-    
+
             $this->dbConnection->commit();
-    
+
             return true;
-    
+
         } catch (PDOException $e) {
             if ($this->dbConnection->inTransaction()) {
                 $this->dbConnection->rollBack();
@@ -59,7 +61,8 @@ class UserModel {
         }
     }
 
-    public function deleteUser($userId) {
+    public function deleteUser($userId)
+    {
 
         $deleteUserQuery = 'DELETE FROM users WHERE id = :id';
         try {
@@ -69,14 +72,14 @@ class UserModel {
                 'id' => $userId['id'],
             ]);
             $rowCount = $deleteStmt->rowCount();
-        if ($rowCount === 0) {
+            if ($rowCount === 0) {
 
-        return false;
-        }
+                return false;
+            }
             $this->dbConnection->commit();
-        
+
             return true;
-        
+
         } catch (PDOException $e) {
             if ($this->dbConnection->inTransaction()) {
                 $this->dbConnection->rollBack();
@@ -90,10 +93,10 @@ class UserModel {
         $getQuery = 'SELECT * FROM users';
         $users = [];
 
-        foreach ($this->dbConnection->query($getQuery) as $user){
+        foreach ($this->dbConnection->query($getQuery) as $user) {
             $users[] = $user;
-       }
-       
-       return $users;
+        }
+
+        return $users;
     }
 }

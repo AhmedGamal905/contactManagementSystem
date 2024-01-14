@@ -7,8 +7,9 @@ namespace App\Controllers;
 use App\View;
 use App\models\UserModel;
 
-class UserController {
-    private $UserModel;
+class UserController
+{
+    public $UserModel;
 
     public function __construct()
     {
@@ -29,7 +30,7 @@ class UserController {
                 exit();
             }
         }
-    
+
 
     }
 
@@ -38,15 +39,15 @@ class UserController {
         $userId = $_POST;
         $model = new UserModel();
         $success = $model->deleteUser($userId);
-    
+
         if ($success) {
             header('Location: /successView');
             exit();
         } else {
             header('Location: /errorView');
-           exit();
+            exit();
         }
-        
+
     }
     public function userView()
     {
@@ -65,5 +66,5 @@ class UserController {
     {
         return View::make('errorView');
     }
-    
-}   
+
+}

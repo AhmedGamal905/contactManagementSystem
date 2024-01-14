@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App;
 
@@ -36,19 +36,19 @@ class Container implements ContainerInterface
     {
         $reflectionClass = new \ReflectionClass($id);
 
-        if (! $reflectionClass->isInstantiable()) {
+        if (!$reflectionClass->isInstantiable()) {
             throw new ContainerException('Class "' . $id . '" is not instantiable');
         }
 
         $constructor = $reflectionClass->getConstructor();
 
-        if (! $constructor) {
+        if (!$constructor) {
             return new $id;
         }
 
         $parameters = $constructor->getParameters();
 
-        if (! $parameters) {
+        if (!$parameters) {
             return new $id;
         }
 
@@ -57,7 +57,7 @@ class Container implements ContainerInterface
                 $name = $param->getName();
                 $type = $param->getType();
 
-                if (! $type) {
+                if (!$type) {
                     throw new ContainerException(
                         'Failed to resolve class'
                     );
@@ -69,7 +69,7 @@ class Container implements ContainerInterface
                     );
                 }
 
-                if ($type instanceof \ReflectionNamedType && ! $type->isBuiltin()) {
+                if ($type instanceof \ReflectionNamedType && !$type->isBuiltin()) {
                     return $this->get($type->getName());
                 }
 
