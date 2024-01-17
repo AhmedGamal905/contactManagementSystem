@@ -21,17 +21,9 @@ class UserController
         $entries = $_POST;
         $model = new UserModel();
         $success = $model->submitEntries($entries);
-        if (!defined('PHPUnit_MAIN_METHOD')) {
-            if ($success) {
-                header('Location: /successView');
-                exit();
-            } else {
-                header('Location: /errorView');
-                exit();
-            }
-        }
+        $location = $success ? '/successView' : '/errorView';
 
-
+        return $location;
     }
 
     public function deleteUser()
@@ -40,31 +32,29 @@ class UserController
         $model = new UserModel();
         $success = $model->deleteUser($userId);
 
-        if ($success) {
-            header('Location: /successView');
-            exit();
-        } else {
-            header('Location: /errorView');
-            exit();
-        }
+        $location = $success ? '/successView' : '/errorView';
 
+        return $location;
     }
+
     public function userView()
     {
         $users = $this->UserModel->getUsers();
         return View::make('userView', ['users' => $users]);
     }
+
     public function submitView()
     {
         return View::make('submitView');
     }
+
     public function successView()
     {
         return View::make('successView');
     }
+
     public function errorView()
     {
         return View::make('errorView');
     }
-
 }

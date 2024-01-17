@@ -23,7 +23,13 @@ class App
     public function run()
     {
         try {
-            echo $this->router->resolve($this->request['uri'], strtolower($this->request['method']));
+            $result = $this->router->resolve($this->request['uri'], strtolower($this->request['method']));
+            if (is_string($result)) {
+                ob_end_clean();
+                header('Location: ' . $result);
+                exit();
+            }
+            echo $result;
         } catch (RouteNotFoundException) {
             http_response_code(404);
 

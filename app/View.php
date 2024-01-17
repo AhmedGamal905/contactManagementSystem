@@ -13,10 +13,6 @@ class View
         protected array $params = []
     ) {
     }
-    public function upload()
-    {
-        var_dump($_FILES);
-    }
 
     public static function make(string $view, array $params = []): static
     {

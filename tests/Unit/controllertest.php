@@ -6,12 +6,30 @@ namespace Tests\Unit;
 
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophet;
 use App\Controllers\UserController;
 use App\Models\UserModel;
 
-/** @test */
+require_once __DIR__ . '/../vendor/autoload.php';
+/**
+ * @runInSeparateProcess
+ */
 class ControllerTest extends TestCase
 {
+    private Prophet $prophet;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->prophet = new Prophet();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->prophet->checkPredictions();
+        parent::tearDown();
+    }
 
     public function testProcessEntriesRedirectsUser()
     {
@@ -26,22 +44,13 @@ class ControllerTest extends TestCase
 
         $app = require __DIR__ . '/../../public/index.php';
 
+        $userController = new UserController();
+        $location = $userController->processEntries();
 
-
-        //$userController = new UserController();````
-
-        //$success = true;
-
-        //$userController->processEntries();
         $user = new UserModel();
-        //var_dump($user->getUsers());
         $users = $user->getUsers();
         $this->assertTrue(end($users)['name'] == 'ahmed');
 
-
-        //   $response = $this->getActualOutput();
-
+        $this->assertEquals('/successView', $location);
     }
 }
-
-// ./vendor/bin/phpunit --filter ControllerTest tests/Unit/controllertest.php

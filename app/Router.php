@@ -44,7 +44,11 @@ class Router
         }
 
         if (is_callable($action)) {
-            return call_user_func($action);
+            $result = call_user_func($action);
+            if (is_string($result)) {
+                return $result;
+            }
+            return $result;
         }
 
         if (is_array($action)) {
@@ -54,11 +58,16 @@ class Router
                 $class = $this->container->get($class);
 
                 if (method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], []);
+                    $result = call_user_func_array([$class, $method], []);
+                    if (is_string($result)) {
+                        return $result;
+                    }
+                    return $result;
                 }
             }
         }
 
         throw new RouteNotFoundException();
     }
+
 }
