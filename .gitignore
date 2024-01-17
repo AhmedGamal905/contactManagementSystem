@@ -1,4 +1,4 @@
 .env
-vendor
 .phpunit.result.cache
+vendor
 phpunit.xml
