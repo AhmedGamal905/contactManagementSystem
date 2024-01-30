@@ -6,11 +6,9 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
-use dotenv;
 use App\DB;
 use App\App;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env');
 class UserModel
 {
 

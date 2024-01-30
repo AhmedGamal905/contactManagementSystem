@@ -20,4 +20,4 @@ Once the Contact Management System is up and running, follow these steps to util
 5. To delete a specific contact, enter the corresponding contact ID in the designated field and click the "Delete" button.
 
 ## Contact
-If you have any questions or need further assistance, please feel free to contact us at Ahmed.gamal9@hotmail.com
+If you have any questions or need further assistance, please feel free to contact me at Ahmed.gamal9@hotmail.com
