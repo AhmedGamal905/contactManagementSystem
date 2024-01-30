@@ -3,5 +3,5 @@
 vendor
 phpunit.xml
 composer-setup.php
-composer.lock
 composer.phar
+composer.lock
